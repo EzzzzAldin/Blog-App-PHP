@@ -18,8 +18,9 @@
             <div>
                 <label for="creator" class="form-label mt-4">Creator</label>
                 <select name="post_creator" class="form-select" id="creator">
-                    <option>Ezzzz Aldin</option>
-                    <option>Mohamed</option>
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                    @endforeach
                 </select>
             </div>
             <button type="submit" class="btn btn-dark mt-3">Submit</button>

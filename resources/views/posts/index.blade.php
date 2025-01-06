@@ -22,21 +22,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>5464</td>
-                            <td>ezz</td>
-                            <td>ezz@gmail.com</td>
-                            <td>20/12/2024</td>
-                            <td>
-                                <a href="{{ route('posts.show', '1') }}" class="btn btn-dark">View</a>
-                                <a href="{{ route('posts.edit', '1') }}" type="button" class="btn btn-info">Edit</a>
-                                <form style="display: inline" action="{{ route('posts.destroy', '1') }}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="btn btn-primary">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
+                        @foreach ($posts as $post)
+                            <tr>
+                                <td>{{ $post->id }}</td>
+                                <td>{{ $post->title }}</td>
+                                <td>{{ $post->posted_by }}</td>
+                                <td>{{ $post->created_at->toDateString() }}</td>
+                                <td>
+                                    <a href="{{ route('posts.show', $post->id) }}" class="btn btn-dark">View</a>
+                                    <a href="{{ route('posts.edit', $post->id) }}" type="button"
+                                        class="btn btn-info">Edit</a>
+                                    <form style="display: inline" action="{{ route('posts.destroy', $post->id) }}"
+                                        method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-primary">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

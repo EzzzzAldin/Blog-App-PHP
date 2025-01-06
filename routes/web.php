@@ -20,10 +20,10 @@ Route::get('/posts/create', [PostController::class, "create"])->name("posts.crea
 
 Route::post("/posts", [PostController::class, "store"])->name("posts.store");
 
-Route::get("/posts/{id}/edit", [PostController::class, "edit"])->name("posts.edit");
+Route::get("/posts/{post}/edit", [PostController::class, "edit"])->name("posts.edit");
 
-Route::put("/posts/{id}", [PostController::class, "update"])->name("posts.update");
+Route::put("/posts/{post}", [PostController::class, "update"])->name("posts.update");
 
-Route::get('/posts/{id}', [PostController::class, "show"])->name("posts.show");
+Route::get('/posts/{post}', [PostController::class, "show"])->name("posts.show");
 
-Route::delete("/posts/{id}", [PostController::class, "destroy"])->name("posts.destroy");
+Route::delete("/posts/{post}", [PostController::class, "destroy"])->name("posts.destroy");
