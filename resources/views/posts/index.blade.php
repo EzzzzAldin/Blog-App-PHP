@@ -26,14 +26,14 @@
                             <tr>
                                 <td>{{ $post->id }}</td>
                                 <td>{{ $post->title }}</td>
-                                <td>{{ $post->posted_by }}</td>
+                                <td>{{ $post->user->name }}</td>
                                 <td>{{ $post->created_at->toDateString() }}</td>
                                 <td>
                                     <a href="{{ route('posts.show', $post->id) }}" class="btn btn-dark">View</a>
                                     <a href="{{ route('posts.edit', $post->id) }}" type="button"
                                         class="btn btn-info">Edit</a>
                                     <form style="display: inline" action="{{ route('posts.destroy', $post->id) }}"
-                                        method="post">
+                                        onsubmit="return confirmDelete()" method="post">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-primary">Delete</button>
@@ -47,4 +47,10 @@
             <div class="col-2"></div>
         </div>
     </div>
+
+    <script>
+        function confirmDelete() {
+            return confirm('Are You Sure Delete This Post ?');
+        }
+    </script>
 @endsection

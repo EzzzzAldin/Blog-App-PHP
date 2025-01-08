@@ -31,6 +31,13 @@ class PostController extends Controller
 
     public function store()
     {
+        // Validate
+        request()->validate([
+            "title" => ["required", "min:3"],
+            "description" => ["required", "min:5"],
+            "post_creator" => ["required", "exists:users,id"]
+        ]);
+
         // Get Data
         $data = request()->all();
 
@@ -41,7 +48,8 @@ class PostController extends Controller
         // Store On DB
         Post::create([
             "title" => $title,
-            "description" => $description
+            "description" => $description,
+            "user_id" => $postCreator
         ]);
 
 
@@ -58,6 +66,13 @@ class PostController extends Controller
 
     public function update(Post $post)
     {
+        // Validate
+        request()->validate([
+            "title" => ["required", "min:3"],
+            "description" => ["required", "min:5"],
+            "post_creator" => ["required", "exists:users,id"]
+        ]);
+
         // Get Data
         $title = request()->title;
         $description = request()->description;
@@ -66,15 +81,18 @@ class PostController extends Controller
         // Update Post In DB
         $post->update([
             "title" => $title,
-            "description" => $description
+            "description" => $description,
+            "user_id" => $postCreator
         ]);
 
 
         return to_route("posts.show", $post)->with("success", "Edit Post Successfully !");
     }
 
-    public function destroy($postId)
+    public function destroy(Post $post)
     {
+        $post->delete();
+
         return to_route("posts.index")->with("success", "Deleted Post Successfully !");
     }
 }

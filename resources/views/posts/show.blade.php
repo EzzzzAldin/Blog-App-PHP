@@ -12,10 +12,10 @@
             </div>
         </div>
         <div class="card text-white bg-primary mb-3">
-            <div class="card-header">Name: Ezz Aldin</div>
+            <div class="card-header">Name: {{ $post->user->name }}</div>
             <div class="card-body">
-                <h4 class="card-title">Email: ezz@gmail.com</h4>
-                <p class="card-text">Created At: {{ $post->created_at }}</p>
+                <h4 class="card-title">Email: {{ $post->user->email }}</h4>
+                <p class="card-text">Created At: {{ $post->user->created_at }}</p>
             </div>
         </div>
     </div>
